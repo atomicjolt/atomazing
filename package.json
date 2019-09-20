@@ -1,0 +1,9 @@
+{
+  "name": "UtahJS",
+  "version": "1.0.0",
+  "description": "Utah JS Scratchpad",
+  "main": "index.js",
+  "author": "Kyle Hovey",
+  "license": "MIT",
+  "private": true
+}
