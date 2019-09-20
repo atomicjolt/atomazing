@@ -45,7 +45,7 @@ class MazeSolver {
     this.prizes = Object
       .entries(prizes)
       .map(([ locStr, points ]) => ({
-        location: strTupToArray(locStr),
+        location: padToFour(strTupToArray(locStr)),
         points,
       }));
 
