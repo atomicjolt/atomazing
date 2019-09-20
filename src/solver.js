@@ -1,4 +1,4 @@
-const exampleMaze = require('../data/example_maze.js')
+const exampleMaze = require('../data/example_maze.json')
 const {
   strTupToArray,
   arrayOfSize,

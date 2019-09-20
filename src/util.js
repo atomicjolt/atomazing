@@ -46,3 +46,14 @@ module.exports = {
   nextCoordForMove,
   padToFour,
 };
+
+// Get the distance between any two points
+const manhattanDistance = (a, b) => {
+  let dist = 0;
+
+  for (let i = 0; i < 3; ++i) {
+    dist += Math.abs(a[i] - b[i]);
+  }
+
+  return dist;
+}
