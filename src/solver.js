@@ -3,6 +3,7 @@ const {
   strTupToArray,
   arrayOfSize,
   nextCoordForMove,
+  padToFour,
 } = require('./util.js');
 
 /**
@@ -29,8 +30,8 @@ class MazeSolver {
      * Turn start and end data into readable format:
      * Array<number>[2]
      */
-    this.start = strTupToArray(start);
-    this.end = strTupToArray(end);
+    this.start = padToFour(strTupToArray(start));
+    this.end = padToFour(strTupToArray(end));
 
     /**
      * Prizes encoded as follows:
@@ -90,3 +91,5 @@ class MazeSolver {
 }
 
 const solver = new MazeSolver(exampleMaze);
+
+console.log(solver.movesFor(solver.start));

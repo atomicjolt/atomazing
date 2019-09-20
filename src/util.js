@@ -33,8 +33,16 @@ const nextCoordForMove = (current, move) => {
   return out;
 }
 
+// Take an array of any size and pad it with zeroes to four elements
+const padToFour = arr => ([
+  ...arr,
+  ...[ 0, 0, 0, 0 ],
+]).slice(0, 4);
+
 module.exports = {
+  indexFor,
   strTupToArray,
   arrayOfSize,
   nextCoordForMove,
+  padToFour,
 };
