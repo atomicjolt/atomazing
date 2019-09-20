@@ -28,7 +28,7 @@ class MazeSolver {
 
     /**
      * Turn start and end data into readable format:
-     * Array<number>[2]
+     * Array<number>[4]
      */
     this.start = padToFour(strTupToArray(start));
     this.end = padToFour(strTupToArray(end));
@@ -37,7 +37,7 @@ class MazeSolver {
      * Prizes encoded as follows:
      *  [
      *    {
-     *      location: Array<number>[2],
+     *      location: Array<number>[4],
      *      points: number,
      *    }, . . .
      *  ]
