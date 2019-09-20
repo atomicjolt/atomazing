@@ -88,8 +88,6 @@ class MazeSolver {
 
       this.maze[X][Y][Z][W] = moves;
     }
-
-    console.log(JSON.stringify(this.maze));
   }
 }
 
