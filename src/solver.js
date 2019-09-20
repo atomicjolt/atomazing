@@ -106,6 +106,17 @@ class MazeSolver {
       this.maze[X][Y][Z][W] = moves;
     }
   }
+
+  /**
+   * get the moves for a given location
+   * @param location {Array<number>[4]}
+   * @return string
+   */
+  movesFor(location) {
+    const [ x, y, z, w ] = location;
+
+    return this.maze[x][y][z][w];
+  }
 }
 
-new MazeSolver(exampleMaze);
+const solver = new MazeSolver(exampleMaze);
