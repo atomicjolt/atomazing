@@ -99,7 +99,10 @@ class MazeSolver {
     const moves = this.movesFor(location);
 
     return moves.split('').map(
-      move => nextCoordForMove(location, move)
+      move => ({
+        location: nextCoordForMove(location, move),
+        move,
+      })
     );
   }
 
@@ -122,27 +125,44 @@ class MazeSolver {
     const visited = new Map;
 
     // Enqueue the start
-    queue.enqueue({ loc: this.start, move: null }, Infinity);
+    const start = { loc: a, move: null };
+    queue.enqueue(start, Infinity);
 
     // Add a termination case for reconstruction
-    cameFrom.set(serialize(this.start));
+    cameFrom.set(serialize(a), start);
 
     // While queue is not empty
     while (!queue.isEmpty()) {
+      //  Dequeue best option
       const location = queue.dequeue();
+      const locationKey = serialize(location);
 
-      for (const neighbor of this.adjacenciesFor(location)) {
-        const loc = serialize(neighbor);
+      //  Enqueue it's neighbors
+      for (const { neighbor, move } of this.adjacenciesFor(location)) {
+        const neighborKey = serialize(neighbor);
 
-        if (!visited.has(loc)) {
-          queue.enqueue(neighbor, 123 /* TODO */);
+        if (!visited.has(neighborKey)) {
+          visited.set(neighborKey);
+          cameFrom.set(neighborKey, locationKey);
+          queue.enqueue(
+            { location: neighbor, move },
+            manhattanDistance(neighbor, b),
+          );
         }
       }
     }
 
-    //  Dequeue best option
+    // Reconstruct path
+    let viewKey = serialize(b);
+    const path = [];
 
-    //  Enqueue it's neighbors
+    while (viewKey !== start) {
+      const next = cameFrom.get(viewKey);
+      path.push(next);
+      viewKey = serialize(next);
+    }
+
+    return path;
   }
 }
 
