@@ -6,6 +6,7 @@ const {
   nextCoordForMove,
   padToFour,
   serialize,
+  manhattanDistance,
 } = require('./util.js');
 
 /**
@@ -143,6 +144,24 @@ class MazeSolver {
     //  Dequeue best option
 
     //  Enqueue it's neighbors
+  }
+
+  findPrizesFromPath(pathNodes) {
+    const shortestPaths = this.prizes.map(() => ({ length: Infinity }));
+    const pathsToMerge = [];
+    pathNodes.forEach((node) => {
+      this.prizes.forEach((prize, index) => {
+        const manDist = manhattanDistance(node.loc, prize.location);
+        if(manDist * 2 < prize.points) {
+          const pathBetween = shortestPathBetween(node.loc, prize.location);
+          if (shortestPaths[index].length > pathBetween.length) {
+            shortestPaths[index] = pathBetween;
+          }
+        }
+      });
+    });
+
+    return shortestPaths.filter((path, index) => !(path.length * 2 < this.prizes[index].points));
   }
 }
 
