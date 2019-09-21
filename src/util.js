@@ -55,6 +55,7 @@ const serialize = loc => loc.join('');
 
 module.exports = {
   indexFor,
+  manhattanDistance,
   strTupToArray,
   arrayOfSize,
   nextCoordForMove,

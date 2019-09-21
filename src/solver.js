@@ -135,18 +135,18 @@ class MazeSolver {
     // While queue is not empty
     while (!queue.isEmpty()) {
       //  Dequeue best option
-      const location = queue.dequeue();
+      const { loc: location } = queue.dequeue();
       const locationKey = serialize(location);
 
       //  Enqueue it's neighbors
-      for (const { neighbor, move } of this.adjacenciesFor(location)) {
+      for (const { location: neighbor, move } of this.adjacenciesFor(location)) {
         const neighborKey = serialize(neighbor);
 
         if (!visited.has(neighborKey)) {
           visited.set(neighborKey);
           cameFrom.set(neighborKey, locationKey);
           queue.enqueue(
-            { location: neighbor, move },
+            { loc: neighbor, move },
             manhattanDistance(neighbor, b),
           );
         }
@@ -160,7 +160,7 @@ class MazeSolver {
     while (viewKey !== start) {
       const next = cameFrom.get(viewKey);
       path.push(next);
-      viewKey = serialize(next);
+      viewKey = serialize(next.location);
     }
 
     return path;
@@ -183,8 +183,13 @@ class MazeSolver {
 
     return shortestPaths.filter((path, index) => !(path.length * 2 < this.prizes[index].points));
   }
+
+  startToEndPath() {
+    return this.shortestPathBetween(this.start, this.end);
+  }
 }
 
 const solver = new MazeSolver(exampleMaze);
 
-console.log(solver.adjacenciesFor(solver.start));
+//console.log(solver.adjacenciesFor(solver.start));
+console.log(solver.startToEndPath());
