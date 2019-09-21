@@ -39,15 +39,6 @@ const padToFour = arr => ([
   ...[ 0, 0, 0, 0 ],
 ]).slice(0, 4);
 
-module.exports = {
-  indexFor,
-  strTupToArray,
-  arrayOfSize,
-  nextCoordForMove,
-  padToFour,
-  serialize,
-};
-
 // Get the distance between any two points
 const manhattanDistance = (a, b) => {
   let dist = 0;
@@ -61,3 +52,12 @@ const manhattanDistance = (a, b) => {
 
 // serialize a location
 const serialize = loc => loc.join('');
+
+module.exports = {
+  indexFor,
+  strTupToArray,
+  arrayOfSize,
+  nextCoordForMove,
+  padToFour,
+  serialize,
+};
