@@ -1,9 +1,11 @@
+const genPQueue = require('@datastructures-js/priority-queue');
 const exampleMaze = require('../data/example_maze.json')
 const {
   strTupToArray,
   arrayOfSize,
   nextCoordForMove,
   padToFour,
+  serialize,
 } = require('./util.js');
 
 /**
@@ -88,8 +90,62 @@ class MazeSolver {
 
     return this.maze[x][y][z][w];
   }
+
+  /**
+   * Find the accessible adjacent locations
+   * @param location {Array<number>[4]}
+   */
+  adjacenciesFor(location) {
+    const moves = this.movesFor(location);
+
+    return moves.split('').map(
+      move => nextCoordForMove(location, move)
+    );
+  }
+
+  /**
+   * Find the shortest path between a and b. Returns
+   * data in this structure:
+   *  [
+   *    { loc: Array<number>[4], move: null },
+   *    { loc: Array<number>[4], move: 'x' }, . . .
+   *  ]
+   */
+  shortestPathBetween(a, b) {
+    // Create the priority queue
+    const queue = genPQueue();
+
+    // Create a "came from" data structure
+    const cameFrom = new Map;
+
+    // Create a "visited" data structure
+    const visited = new Map;
+
+    // Enqueue the start
+    queue.enqueue({ loc: this.start, move: null }, Infinity);
+
+    // Add a termination case for reconstruction
+    cameFrom.set(serialize(this.start));
+
+    // While queue is not empty
+    while (!queue.isEmpty()) {
+      const location = queue.dequeue();
+
+      for (const neighbor of this.adjacenciesFor(location)) {
+        const loc = serialize(neighbor);
+
+        if (!visited.has(loc)) {
+          queue.enqueue(neighbor, 123 /* TODO */);
+        }
+      }
+    }
+
+    //  Dequeue best option
+
+    //  Enqueue it's neighbors
+  }
 }
 
 const solver = new MazeSolver(exampleMaze);
 
-console.log(solver.movesFor(solver.start));
+console.log(solver.adjacenciesFor(solver.start));

@@ -2,3 +2,7 @@
 # yarn lockfile v1
 
 
+"@datastructures-js/priority-queue@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@datastructures-js/priority-queue/-/priority-queue-1.0.2.tgz#3511cb9cd7fb03be057afb7874cd8839d1ac91f8"
+  integrity sha512-HrSXJy5QPBn7DyF5ubjR6g88zW4SXDcYf732MKXTwRYf/MSVc8C1oM7UkDpaIc9OoC4r8kwpYa6oWndQZykd1w==

@@ -45,6 +45,7 @@ module.exports = {
   arrayOfSize,
   nextCoordForMove,
   padToFour,
+  serialize,
 };
 
 // Get the distance between any two points
@@ -57,3 +58,6 @@ const manhattanDistance = (a, b) => {
 
   return dist;
 }
+
+// serialize a location
+const serialize = loc => loc.join('');
